@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adaptation – P6 Science Revision</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2d9e4e; --green-light: #e6f7ec; --green-dark: #1a6632;
+    --blue: #1a7dc4; --blue-light: #e3f2fd; --blue-dark: #0d4f80;
+    --amber: #e67e22; --amber-light: #fef3e2; --amber-dark: #8c4a0a;
+    --coral: #e84545; --coral-light: #fdeaea; --coral-dark: #8b1a1a;
+    --purple: #7c3aed; --purple-light: #ede9fe; --purple-dark: #4c1d95;
+    --teal: #0d9488; --teal-light: #e0f7f5; --teal-dark: #064e3b;
+    --bg: #f4f9f4;
+    --card: #ffffff;
+    --text: #1a2e1a;
+    --muted: #5a7a5a;
+    --border: #d4e8d4;
+    --radius: 14px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1a6632 0%, #2d9e4e 50%, #0d9488 100%);
+    color: white;
+    padding: 2.5rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '🌿🦁🐠🦎🌵🐧🌊🦋';
+    font-size: 1.6rem;
+    letter-spacing: 0.5rem;
+    display: block;
+    opacity: 0.35;
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .hero p {
+    margin-top: 0.5rem;
+    font-size: 1.05rem;
+    opacity: 0.88;
+  }
+  .badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .badge {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 20px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  /* NAV TABS */
+  .nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 1.2rem 1rem 0;
+    flex-wrap: wrap;
+    background: white;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-btn {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 800;
+    padding: 0.55rem 1rem;
+    border-radius: 10px 10px 0 0;
+    border: none;
+    cursor: pointer;
+    background: #e8f4e8;
+    color: var(--muted);
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+  }
+  .nav-btn.active {
+    background: var(--green-light);
+    color: var(--green-dark);
+    border-bottom: 3px solid var(--green);
+  }
+  .nav-btn:hover:not(.active) { background: #d8ecd8; color: var(--text); }
+
+  /* SECTIONS */
+  .section { display: none; padding: 2rem 1.5rem; max-width: 860px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1.5px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+  .card h2 { font-family: 'Nunito', sans-serif; font-size: 1.2rem; font-weight: 800; margin-bottom: 0.7rem; }
+  .card p { font-size: 0.95rem; line-height: 1.7; color: #2a3e2a; }
+
+  /* DEFINITION HIGHLIGHT */
+  .definition-box {
+    background: var(--green-light);
+    border-left: 5px solid var(--green);
+    border-radius: 0 10px 10px 0;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+  }
+  .definition-box .label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--green-dark); margin-bottom: 0.3rem; }
+  .definition-box p { font-size: 0.97rem; font-weight: 600; color: var(--green-dark); }
+
+  /* KEY POINT */
+  .key-point {
+    background: var(--amber-light);
+    border-left: 5px solid var(--amber);
+    border-radius: 0 10px 10px 0;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+    font-size: 0.93rem;
+    color: var(--amber-dark);
+    font-weight: 600;
+  }
+  .key-point .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 0.2rem; }
+
+  /* HABITAT TABS */
+  .habitat-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+  .hab-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 20px;
+    border: 2px solid var(--border);
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--muted);
+  }
+  .hab-btn.active, .hab-btn:hover { border-color: var(--green); background: var(--green-light); color: var(--green-dark); }
+
+  /* ANIMAL GRID */
+  .animal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
+  .animal-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .animal-card:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  .animal-card.selected { border-color: var(--green); border-width: 2.5px; background: var(--green-light); }
+  .animal-emoji { font-size: 2.5rem; margin-bottom: 0.4rem; }
+  .animal-name { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem; }
+  .animal-hint { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+  .adaptations-panel {
+    background: var(--blue-light);
+    border: 1.5px solid #b3d8f5;
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    margin-top: 1rem;
+    display: none;
+  }
+  .adaptations-panel.show { display: block; }
+  .adaptations-panel h3 { font-family: 'Nunito', sans-serif; font-weight: 800; color: var(--blue-dark); margin-bottom: 0.7rem; font-size: 1rem; }
+  .adapt-item {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+  }
+  .adapt-tag {
+    background: var(--blue);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    margin-top: 1px;
+  }
+  .adapt-tag.structural { background: var(--purple); }
+  .adapt-tag.behavioural { background: var(--teal); }
+
+  /* QUIZ */
+  .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
+  .score-box {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    background: var(--green-light);
+    color: var(--green-dark);
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1.5px solid var(--green);
+  }
+  .progress-bar-wrap { background: #d4e8d4; border-radius: 10px; height: 8px; margin-bottom: 1.5rem; overflow: hidden; }
+  .progress-bar { background: var(--green); height: 100%; border-radius: 10px; transition: width 0.4s; }
+
+  .question-box { margin-bottom: 1.2rem; }
+  .question-box .q-num { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 0.4rem; }
+  .question-box .q-text { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1.05rem; line-height: 1.5; color: var(--text); }
+
+  .options { display: grid; gap: 0.6rem; margin-top: 1rem; }
+  .opt-btn {
+    text-align: left;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.93rem;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .opt-btn:hover:not(:disabled) { border-color: var(--blue); background: var(--blue-light); }
+  .opt-btn.correct { background: var(--green-light); border-color: var(--green); color: var(--green-dark); }
+  .opt-btn.wrong { background: var(--coral-light); border-color: var(--coral); color: var(--coral-dark); }
+  .opt-btn:disabled { cursor: default; }
+
+  .feedback-box {
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    display: none;
+  }
+  .feedback-box.correct { background: var(--green-light); color: var(--green-dark); border: 1.5px solid var(--green); display: block; }
+  .feedback-box.wrong { background: var(--coral-light); color: var(--coral-dark); border: 1.5px solid var(--coral); display: block; }
+
+  .nav-btns { display: flex; gap: 0.7rem; margin-top: 1.2rem; }
+  .action-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .action-btn.primary { background: var(--green); color: white; }
+  .action-btn.primary:hover { background: var(--green-dark); }
+  .action-btn.secondary { background: white; color: var(--muted); border: 1.5px solid var(--border); }
+  .action-btn.secondary:hover { background: var(--bg); }
+  .action-btn:disabled { opacity: 0.4; cursor: default; }
+
+  .result-box {
+    text-align: center;
+    padding: 2rem;
+    display: none;
+  }
+  .result-box.show { display: block; }
+  .result-emoji { font-size: 4rem; }
+  .result-score { font-family: 'Nunito', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--green-dark); margin: 0.5rem 0; }
+  .result-msg { font-size: 1.05rem; color: var(--muted); }
+  .result-breakdown { margin: 1.2rem auto; max-width: 360px; text-align: left; }
+  .result-breakdown .rb-item { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  .rb-right { font-weight: 700; }
+  .rb-right.pass { color: var(--green); }
+  .rb-right.fail { color: var(--coral); }
+
+  /* EXAM TIPS */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+  .tip-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem;
+  }
+  .tip-card .tip-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .tip-card h3 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem; color: var(--green-dark); margin-bottom: 0.4rem; }
+  .tip-card p { font-size: 0.86rem; line-height: 1.6; color: #3a5a3a; }
+
+  /* TABLE */
+  .adapt-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .adapt-table th { background: var(--green); color: white; padding: 0.6rem 0.8rem; text-align: left; font-family: 'Nunito', sans-serif; font-weight: 800; }
+  .adapt-table td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .adapt-table tr:nth-child(even) td { background: #f8fdf8; }
+  .adapt-table tr:hover td { background: var(--green-light); }
+
+  /* KEYWORD MATCH GAME */
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .match-col { display: flex; flex-direction: column; gap: 0.5rem; }
+  .match-item {
+    padding: 0.65rem 0.9rem;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+    background: white;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+  }
+  .match-item:hover { border-color: var(--blue); background: var(--blue-light); }
+  .match-item.selected { border-color: var(--amber); background: var(--amber-light); color: var(--amber-dark); }
+  .match-item.matched { border-color: var(--green); background: var(--green-light); color: var(--green-dark); cursor: default; }
+  .match-item.wrong-flash { border-color: var(--coral); background: var(--coral-light); }
+  .match-score { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; margin-top: 0.8rem; color: var(--green-dark); }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.8rem; }
+    .animal-grid { grid-template-columns: repeat(2, 1fr); }
+    .match-grid { grid-template-columns: 1fr; }
+    .match-col:last-child { margin-top: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🌿 Adaptation</h1>
+  <p>Primary 6 Science · PSLE Revision Module</p>
+  <div class="badge-row">
+    <span class="badge">Structural</span>
+    <span class="badge">Behavioural</span>
+    <span class="badge">3 Habitats</span>
+    <span class="badge">Quiz</span>
+    <span class="badge">Exam Tips</span>
+  </div>
+</div>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="showSection('concepts')">📖 Concepts</button>
+  <button class="nav-btn" onclick="showSection('habitats')">🌍 Habitats</button>
+  <button class="nav-btn" onclick="showSection('match')">🔗 Match It</button>
+  <button class="nav-btn" onclick="showSection('quiz')">✏️ Quiz</button>
+  <button class="nav-btn" onclick="showSection('tips')">⭐ Exam Tips</button>
+</nav>
+
+<!-- ============ CONCEPTS ============ -->
+<section id="concepts" class="section active">
+  <div class="card">
+    <h2>What is Adaptation?</h2>
+    <div class="definition-box">
+      <div class="label">📌 Definition</div>
+      <p>Adaptation is a special feature or behaviour that helps a living thing survive in its habitat (environment).</p>
+    </div>
+    <p>Every living thing has adaptations that suit it perfectly to where it lives. These are <strong>not</strong> learned — they are inherited (passed down from parents).</p>
+  </div>
+
+  <div class="card">
+    <h2>Types of Adaptation</h2>
+    <table class="adapt-table">
+      <thead>
+        <tr><th>Type</th><th>What it means</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Structural</strong></td><td>A <em>physical feature</em> of the body — shape, part, covering</td><td>Thick fur of a polar bear</td></tr>
+        <tr><td><strong>Behavioural</strong></td><td>Something the animal <em>does</em> — an action or behaviour</td><td>Camels storing water in their hump fat</td></tr>
+      </tbody>
+    </table>
+    <div class="key-point"><div class="label">⚡ PSLE Trick</div>If you can see it on the body → structural. If it's something the animal DOES → behavioural.</div>
+  </div>
+
+  <div class="card">
+    <h2>The Golden Rule for Answering</h2>
+    <div class="definition-box">
+      <div class="label">📝 Answer Structure</div>
+      <p>"The [feature/behaviour] allows/helps the [animal] to [survive/obtain food/escape predators/etc.] in its [habitat]."</p>
+    </div>
+    <p>Always <strong>link the adaptation to survival</strong>. Never just describe what the feature looks like — explain <em>why</em> it helps the animal survive.</p>
+    <div class="key-point"><div class="label">❌ Weak Answer</div>A cactus has a thick stem. (No link to survival!)</div>
+    <div class="key-point"><div class="label">✅ Strong Answer</div>A cactus stores water in its thick stem, allowing it to survive in the hot, dry desert where there is little rainfall.</div>
+  </div>
+</section>
+
+<!-- ============ HABITATS ============ -->
+<section id="habitats" class="section">
+  <div class="card">
+    <h2>Explore Habitats & Adaptations</h2>
+    <p style="margin-bottom:1rem;">Choose a habitat, then click on an animal to see its adaptations.</p>
+    <div class="habitat-tabs">
+      <button class="hab-btn active" onclick="setHabitat('desert')">🏜️ Desert</button>
+      <button class="hab-btn" onclick="setHabitat('ocean')">🌊 Ocean / Aquatic</button>
+      <button class="hab-btn" onclick="setHabitat('arctic')">🧊 Arctic / Cold</button>
+      <button class="hab-btn" onclick="setHabitat('rainforest')">🌳 Rainforest</button>
+    </div>
+    <div id="animal-grid" class="animal-grid"></div>
+    <div id="adapt-panel" class="adaptations-panel"></div>
+  </div>
+</section>
+
+<!-- ============ MATCH ============ -->
+<section id="match" class="section">
+  <div class="card">
+    <h2>🔗 Match the Adaptation!</h2>
+    <p style="margin-bottom:1rem;">Click a feature on the left, then click its purpose on the right.</p>
+    <div id="match-container"></div>
+    <div id="match-score" class="match-score" style="display:none;"></div>
+    <div class="nav-btns" style="margin-top:1rem;">
+      <button class="action-btn primary" onclick="setupMatch()">🔄 New Round</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="quiz" class="section">
+  <div class="card">
+    <div id="quiz-container">
+      <div class="quiz-header">
+        <span id="q-counter" style="font-family:Nunito;font-weight:800;font-size:0.9rem;color:var(--muted);">Question 1 / 10</span>
+        <span class="score-box">Score: <span id="score-display">0</span></span>
+      </div>
+      <div class="progress-bar-wrap"><div id="progress-bar" class="progress-bar" style="width:10%"></div></div>
+      <div class="question-box">
+        <div class="q-num" id="q-num">Question 1</div>
+        <div class="q-text" id="q-text"></div>
+      </div>
+      <div class="options" id="options"></div>
+      <div class="feedback-box" id="feedback"></div>
+      <div class="nav-btns">
+        <button class="action-btn primary" id="next-btn" onclick="nextQuestion()" disabled>Next →</button>
+        <button class="action-btn secondary" onclick="restartQuiz()">Restart</button>
+      </div>
+    </div>
+    <div class="result-box" id="result-box">
+      <div class="result-emoji" id="result-emoji"></div>
+      <div class="result-score" id="result-score"></div>
+      <div class="result-msg" id="result-msg"></div>
+      <div class="result-breakdown" id="result-breakdown"></div>
+      <button class="action-btn primary" onclick="restartQuiz()" style="margin-top:1rem;">Try Again 🔄</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIPS ============ -->
+<section id="tips" class="section">
+  <div class="card" style="margin-bottom:1.5rem;">
+    <h2>⭐ PSLE Exam Tips for Adaptation</h2>
+    <p>Use these strategies during your exam to score full marks.</p>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">🏷️</div>
+      <h3>Always Label the Type</h3>
+      <p>State whether it is a <strong>structural</strong> or <strong>behavioural</strong> adaptation if the question asks. Don't skip this — it's often 1 mark.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🔗</div>
+      <h3>Link to Survival</h3>
+      <p>Never just describe the feature. Always explain <em>how</em> it helps the animal survive, obtain food, or avoid predators.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🌡️</div>
+      <h3>Mention the Habitat Condition</h3>
+      <p>Connect to the environment: "in the dry desert", "in cold arctic waters", "in the dark deep ocean." This shows understanding.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📏</div>
+      <h3>Match Marks to Points</h3>
+      <p>If a question is worth 2 marks, give 2 separate adaptation points. Each mark = one feature + one function.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🚫</div>
+      <h3>Avoid Vague Words</h3>
+      <p>Don't say "to help it survive." Be specific: "to reduce water loss", "to attract prey", "to camouflage from predators."</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🔄</div>
+      <h3>Structural vs Behavioural</h3>
+      <p><strong>Structural</strong> = body part/covering you can SEE.<br><strong>Behavioural</strong> = something the animal DOES (action/habit).</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem;">
+    <h2>🧠 Common PSLE Keywords</h2>
+    <table class="adapt-table" style="margin-top:0.7rem;">
+      <thead><tr><th>Situation</th><th>Use these words</th></tr></thead>
+      <tbody>
+        <tr><td>Animal gets food</td><td>obtain food, catch prey, reach nectar</td></tr>
+        <tr><td>Avoid being eaten</td><td>camouflage, escape predators, warn enemies</td></tr>
+        <tr><td>Survive hot/dry</td><td>reduce water loss, store water, reflect heat</td></tr>
+        <tr><td>Survive cold</td><td>insulate the body, retain heat, keep warm</td></tr>
+        <tr><td>Move in water</td><td>reduce water resistance, swim efficiently</td></tr>
+        <tr><td>Move on land</td><td>grip the ground, balance, support weight</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script>
+// ============ NAV ============
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  if (id === 'habitats') renderHabitat('desert');
+  if (id === 'match') setupMatch();
+  if (id === 'quiz') initQuiz();
+}
+
+// ============ HABITATS DATA ============
+const habitatData = {
+  desert: {
+    animals: [
+      { emoji:'🐪', name:'Camel', hint:'Desert traveller', adaptations:[
+        {tag:'structural', text:'Humps store fat (not water!) — the fat can be converted to energy and water when food is scarce.'},
+        {tag:'structural', text:'Long eyelashes and slit-like nostrils keep out blowing sand.'},
+        {tag:'structural', text:'Wide, flat feet spread weight on sand so they do not sink.'},
+        {tag:'behavioural', text:'Can travel long distances without drinking — tolerates water loss that would kill other animals.'}
+      ]},
+      { emoji:'🦎', name:'Desert Lizard', hint:'Heat master', adaptations:[
+        {tag:'structural', text:'Scaly, dry skin prevents water loss through the body surface.'},
+        {tag:'behavioural', text:'Burrows underground during the hottest part of the day to avoid extreme heat.'},
+        {tag:'behavioural', text:'Absorbs heat by basking in the morning sun to warm up quickly.'}
+      ]},
+      { emoji:'🌵', name:'Cactus', hint:'Desert plant', adaptations:[
+        {tag:'structural', text:'Thick, fleshy stem stores large amounts of water for use during dry periods.'},
+        {tag:'structural', text:'Leaves are modified into spines — reduces surface area to minimise water loss; also deters animals.'},
+        {tag:'structural', text:'Extensive shallow roots spread wide to absorb rain water quickly before it evaporates.'}
+      ]},
+      { emoji:'🦊', name:'Fennec Fox', hint:'Big-eared fox', adaptations:[
+        {tag:'structural', text:'Very large ears have many blood vessels near the surface — radiate heat to cool the body.'},
+        {tag:'structural', text:'Pale, sandy-coloured fur camouflages it against the desert sand.'},
+        {tag:'behavioural', text:'Nocturnal — hunts at night when temperatures are cooler.'}
+      ]}
+    ]
+  },
+  ocean: {
+    animals: [
+      { emoji:'🐟', name:'Fish', hint:'Streamlined swimmer', adaptations:[
+        {tag:'structural', text:'Streamlined (torpedo-shaped) body reduces water resistance, allowing efficient movement.'},
+        {tag:'structural', text:'Fins and tail provide steering and propulsion through the water.'},
+        {tag:'structural', text:'Gills extract dissolved oxygen from water so they can breathe underwater.'},
+        {tag:'structural', text:'Scales protect the body and reduce friction with water.'}
+      ]},
+      { emoji:'🦈', name:'Shark', hint:'Ocean predator', adaptations:[
+        {tag:'structural', text:'Rows of sharp teeth grip and tear prey — continuously replaced throughout life.'},
+        {tag:'structural', text:'Counter-shading (dark top, light belly) makes them hard to spot from above or below.'},
+        {tag:'structural', text:'Lateral line detects vibrations and movements in the water to locate prey.'}
+      ]},
+      { emoji:'🐙', name:'Octopus', hint:'Master of disguise', adaptations:[
+        {tag:'structural', text:'Chromatophores (pigment cells) in skin allow rapid colour and texture change for camouflage.'},
+        {tag:'behavioural', text:'Squirts ink to confuse predators and escape.'},
+        {tag:'structural', text:'Soft body with no skeleton allows it to squeeze into small crevices to hide.'}
+      ]},
+      { emoji:'🪸', name:'Water Lily', hint:'Floating plant', adaptations:[
+        {tag:'structural', text:'Flat, broad leaves float on the water surface to maximise sunlight for photosynthesis.'},
+        {tag:'structural', text:'Waxy, water-repellent surface prevents leaves from becoming waterlogged.'},
+        {tag:'structural', text:'Air spaces in stems and leaves provide buoyancy to keep the plant afloat.'}
+      ]}
+    ]
+  },
+  arctic: {
+    animals: [
+      { emoji:'🐻‍❄️', name:'Polar Bear', hint:'Arctic giant', adaptations:[
+        {tag:'structural', text:'Thick layer of blubber (fat) under the skin insulates the body against extreme cold.'},
+        {tag:'structural', text:'Thick white fur traps warm air close to the body; colour provides camouflage in snow.'},
+        {tag:'structural', text:'Large, slightly webbed paws act as paddles for swimming and distribute weight on ice.'},
+        {tag:'behavioural', text:'Pregnant females hibernate in snow dens during winter to conserve energy.'}
+      ]},
+      { emoji:'🐧', name:'Penguin', hint:'Waddling swimmer', adaptations:[
+        {tag:'structural', text:'Streamlined body and paddle-like flippers (wings) allow fast, efficient swimming.'},
+        {tag:'structural', text:'Tightly packed, oily feathers waterproof the body and trap air for insulation.'},
+        {tag:'behavioural', text:'Huddle together in large groups to share body heat during blizzards.'}
+      ]},
+      { emoji:'🦭', name:'Seal', hint:'Underwater acrobat', adaptations:[
+        {tag:'structural', text:'Very thick blubber layer provides both insulation and an energy reserve.'},
+        {tag:'structural', text:'Torpedo-shaped, streamlined body reduces drag for fast underwater swimming.'},
+        {tag:'structural', text:'Flippers with claws help grip ice when hauling out of the water.'}
+      ]},
+      { emoji:'🦉', name:'Snowy Owl', hint:'Silent hunter', adaptations:[
+        {tag:'structural', text:'White feathers provide excellent camouflage against snow, helping it ambush prey.'},
+        {tag:'structural', text:'Dense feathers on feet act like snowshoes and insulate against cold ground.'},
+        {tag:'behavioural', text:'Can hunt in complete darkness using exceptional hearing to locate prey under snow.'}
+      ]}
+    ]
+  },
+  rainforest: {
+    animals: [
+      { emoji:'🐒', name:'Monkey', hint:'Tree acrobat', adaptations:[
+        {tag:'structural', text:'Prehensile tail grips branches like a fifth limb, preventing falls in the canopy.'},
+        {tag:'structural', text:'Long, flexible fingers and toes grasp branches firmly when swinging.'},
+        {tag:'behavioural', text:'Lives in social groups — members warn each other of predators with alarm calls.'}
+      ]},
+      { emoji:'🦋', name:'Butterfly', hint:'Colourful flier', adaptations:[
+        {tag:'structural', text:'Bright warning colours (red/orange/yellow) signal to predators that the butterfly is toxic.'},
+        {tag:'structural', text:'Some species have eye-like patterns on wings to startle or confuse predators.'},
+        {tag:'structural', text:'Long, tube-like proboscis (feeding tube) reaches deep into flowers to sip nectar.'}
+      ]},
+      { emoji:'🐍', name:'Tree Snake', hint:'Canopy hunter', adaptations:[
+        {tag:'structural', text:'Green colouring provides camouflage against leaves, hiding it from both predators and prey.'},
+        {tag:'structural', text:'Flattened body allows it to glide short distances between trees.'},
+        {tag:'behavioural', text:'Ambushes prey by remaining motionless, blending into the background.'}
+      ]},
+      { emoji:'🌺', name:'Rafflesia', hint:'Largest flower', adaptations:[
+        {tag:'structural', text:'Has no leaves, roots, or stem — lives entirely as a parasite inside a host vine.'},
+        {tag:'structural', text:'Produces the smell of rotting flesh to attract flies, which pollinate the flower.'},
+        {tag:'structural', text:'Enormous flower size maximises visibility to attract pollinators in dim forest undergrowth.'}
+      ]}
+    ]
+  }
+};
+
+let currentHabitat = 'desert';
+let selectedAnimal = null;
+
+function setHabitat(h) {
+  currentHabitat = h;
+  selectedAnimal = null;
+  document.querySelectorAll('.hab-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderHabitat(h);
+}
+
+function renderHabitat(h) {
+  const data = habitatData[h];
+  const grid = document.getElementById('animal-grid');
+  const panel = document.getElementById('adapt-panel');
+  grid.innerHTML = data.animals.map((a,i) =>
+    `<div class="animal-card" onclick="showAdaptations(${i})">
+      <div class="animal-emoji">${a.emoji}</div>
+      <div class="animal-name">${a.name}</div>
+      <div class="animal-hint">${a.hint}</div>
+    </div>`
+  ).join('');
+  panel.classList.remove('show');
+  panel.innerHTML = '';
+}
+
+function showAdaptations(idx) {
+  document.querySelectorAll('.animal-card').forEach((c,i) => {
+    c.classList.toggle('selected', i === idx);
+  });
+  const animal = habitatData[currentHabitat].animals[idx];
+  const panel = document.getElementById('adapt-panel');
+  panel.innerHTML = `<h3>${animal.emoji} ${animal.name} — Adaptations</h3>` +
+    animal.adaptations.map(a =>
+      `<div class="adapt-item">
+        <span class="adapt-tag ${a.tag}">${a.tag.charAt(0).toUpperCase() + a.tag.slice(1)}</span>
+        <span>${a.text}</span>
+      </div>`
+    ).join('');
+  panel.classList.add('show');
+}
+
+// Force render on page load for habitats
+renderHabitat('desert');
+
+// ============ MATCH GAME ============
+const allMatchPairs = [
+  {feature:'Streamlined body', purpose:'Reduces water resistance for swimming'},
+  {feature:'Thick blubber layer', purpose:'Insulates against cold temperatures'},
+  {feature:'Spines (modified leaves)', purpose:'Reduce water loss and deter animals'},
+  {feature:'Large ears (fennec fox)', purpose:'Radiate heat to cool the body'},
+  {feature:'White fur (polar bear)', purpose:'Camouflage in snow and ice'},
+  {feature:'Webbed feet (duck)', purpose:'Paddle efficiently in water'},
+  {feature:'Sharp, hooked beak (eagle)', purpose:'Tear meat from prey'},
+  {feature:'Waxy leaf surface', purpose:'Prevent waterlogging / repel water'},
+  {feature:'Root hairs', purpose:'Absorb water and minerals from soil'},
+  {feature:'Gills (fish)', purpose:'Extract oxygen dissolved in water'},
+  {feature:'Counter-shading', purpose:'Camouflage from above and below'},
+  {feature:'Fat-storing hump (camel)', purpose:'Convert to energy & water when scarce'}
+];
+
+let matchSelected = null;
+let matchPairs = [];
+let matchedCount = 0;
+
+function setupMatch() {
+  const shuffled = [...allMatchPairs].sort(() => Math.random() - 0.5).slice(0, 5);
+  matchPairs = shuffled;
+  matchSelected = null;
+  matchedCount = 0;
+  const features = shuffled.map(p => p.feature).sort(() => Math.random() - 0.5);
+  const purposes = shuffled.map(p => p.purpose).sort(() => Math.random() - 0.5);
+
+  const container = document.getElementById('match-container');
+  const scoreEl = document.getElementById('match-score');
+  scoreEl.style.display = 'none';
+
+  container.innerHTML = `<div class="match-grid">
+    <div class="match-col" id="features-col">
+      ${features.map(f => `<div class="match-item" data-type="feature" data-val="${f}" onclick="matchClick(this)">${f}</div>`).join('')}
+    </div>
+    <div class="match-col" id="purposes-col">
+      ${purposes.map(p => `<div class="match-item" data-type="purpose" data-val="${p}" onclick="matchClick(this)">${p}</div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function matchClick(el) {
+  if (el.classList.contains('matched')) return;
+  if (matchSelected === null) {
+    document.querySelectorAll('.match-item').forEach(i => i.classList.remove('selected'));
+    el.classList.add('selected');
+    matchSelected = el;
+  } else {
+    if (matchSelected === el) { el.classList.remove('selected'); matchSelected = null; return; }
+    if (matchSelected.dataset.type === el.dataset.type) {
+      matchSelected.classList.remove('selected');
+      matchSelected = el;
+      el.classList.add('selected');
+      return;
+    }
+    const fEl = matchSelected.dataset.type === 'feature' ? matchSelected : el;
+    const pEl = matchSelected.dataset.type === 'purpose' ? matchSelected : el;
+    const pair = matchPairs.find(p => p.feature === fEl.dataset.val);
+    if (pair && pair.purpose === pEl.dataset.val) {
+      fEl.classList.remove('selected'); fEl.classList.add('matched');
+      pEl.classList.remove('selected'); pEl.classList.add('matched');
+      matchedCount++;
+      if (matchedCount === matchPairs.length) {
+        const s = document.getElementById('match-score');
+        s.textContent = '🎉 All matched! Great work!';
+        s.style.display = 'block';
+      }
+    } else {
+      fEl.classList.add('wrong-flash'); pEl.classList.add('wrong-flash');
+      setTimeout(() => {
+        fEl.classList.remove('wrong-flash','selected');
+        pEl.classList.remove('wrong-flash','selected');
+      }, 700);
+    }
+    matchSelected = null;
+  }
+}
+
+// ============ QUIZ ============
+const quizData = [
+  {q:'A camel\'s hump stores fat which can be converted to energy and water. What TYPE of adaptation is this?', opts:['Structural','Behavioural','Both structural and behavioural','Neither'], ans:0, exp:'The hump is a physical body part — that makes it a structural adaptation. The fat stored inside helps the camel survive in the desert.'},
+  {q:'A penguin huddles with others in a large group during a blizzard to stay warm. What type of adaptation is this?', opts:['Structural','Behavioural','Physiological','Inherited trait'], ans:1, exp:'Huddling is something the penguin DOES — it is an action, so it is a behavioural adaptation.'},
+  {q:'A cactus has thick, fleshy stems. How does this help it survive in the desert?', opts:['It makes food faster by photosynthesis','It stores water for use during dry periods','It scares away animals','It absorbs sunlight better'], ans:1, exp:'The thick stem stores water so the cactus can survive long periods without rain. Always link the feature to its survival function!'},
+  {q:'Which feature helps a fish swim faster in the water?', opts:['Its bright colours','Its streamlined (torpedo-shaped) body','Its sharp teeth','Its large eyes'], ans:1, exp:'A streamlined body reduces water resistance (drag), allowing the fish to move through the water more efficiently.'},
+  {q:'A polar bear has white fur. What is the MAIN purpose of this adaptation?', opts:['To reflect sunlight and keep cool','To camouflage against snow and ice','To attract a mate','To repel water when swimming'], ans:1, exp:'White fur provides camouflage in the snowy Arctic environment, helping polar bears sneak up on prey without being seen.'},
+  {q:'The leaves of a water lily are flat and broad. This is an adaptation to help the plant:', opts:['Absorb more rainfall','Maximise sunlight absorbed for photosynthesis','Reduce water loss','Store starch in leaves'], ans:1, exp:'Flat, broad leaves floating on the surface receive maximum sunlight, which the plant needs for photosynthesis.'},
+  {q:'A desert lizard burrows underground during the hottest part of the day. This is a:', opts:['Structural adaptation','Behavioural adaptation','Defence mechanism only','Feeding adaptation'], ans:1, exp:'Burrowing is an action/behaviour, making it a behavioural adaptation. It helps the lizard avoid lethal heat during the hottest hours.'},
+  {q:'A seal has a very thick layer of blubber under its skin. This helps the seal to:', opts:['Swim faster','See better underwater','Insulate its body against the cold Arctic waters','Store food for winter'], ans:2, exp:'Blubber (fat) is an excellent insulator. It traps body heat and prevents the seal\'s body temperature from dropping in icy Arctic waters.'},
+  {q:'Which of the following is a structural adaptation of an eagle?', opts:['Swooping down from great heights to catch prey','Building its nest on tall clifftops','Sharp, hooked beak for tearing meat','Migrating to warmer regions in winter'], ans:2, exp:'The beak is a physical body part — that makes it structural. It is hooked and sharp to help the eagle grip and tear its prey.'},
+  {q:'A stick insect looks exactly like a twig. This adaptation mainly helps the insect to:', opts:['Attract a mate','Avoid being spotted and eaten by predators','Absorb more sunlight','Move faster'], ans:1, exp:'Looking like a twig is camouflage — a structural adaptation. It makes the insect nearly invisible to predators, helping it survive.'}
+];
+
+let currentQ = 0;
+let score = 0;
+let answered = false;
+let results = [];
+
+function initQuiz() {
+  currentQ = 0; score = 0; answered = false; results = [];
+  document.getElementById('quiz-container').style.display = 'block';
+  document.getElementById('result-box').classList.remove('show');
+  renderQuestion();
+}
+
+function restartQuiz() { initQuiz(); }
+
+function renderQuestion() {
+  const q = quizData[currentQ];
+  document.getElementById('q-counter').textContent = `Question ${currentQ+1} / ${quizData.length}`;
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('q-num').textContent = `Question ${currentQ+1}`;
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('progress-bar').style.width = `${((currentQ+1)/quizData.length)*100}%`;
+  document.getElementById('feedback').className = 'feedback-box';
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('next-btn').disabled = true;
+  answered = false;
+
+  const opts = document.getElementById('options');
+  opts.innerHTML = q.opts.map((o,i) =>
+    `<button class="opt-btn" onclick="selectAnswer(${i})">${String.fromCharCode(65+i)}. ${o}</button>`
+  ).join('');
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = quizData[currentQ];
+  const btns = document.querySelectorAll('.opt-btn');
+  btns.forEach(b => b.disabled = true);
+  const fb = document.getElementById('feedback');
+  if (idx === q.ans) {
+    btns[idx].classList.add('correct');
+    fb.className = 'feedback-box correct';
+    fb.innerHTML = '✅ Correct! ' + q.exp;
+    score++;
+    results.push({num:currentQ+1, correct:true});
+  } else {
+    btns[idx].classList.add('wrong');
+    btns[q.ans].classList.add('correct');
+    fb.className = 'feedback-box wrong';
+    fb.innerHTML = '❌ Not quite. ' + q.exp;
+    results.push({num:currentQ+1, correct:false});
+  }
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('next-btn').disabled = false;
+  if (currentQ === quizData.length - 1) document.getElementById('next-btn').textContent = 'See Results 🏆';
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= quizData.length) { showResults(); return; }
+  renderQuestion();
+  document.getElementById('next-btn').textContent = 'Next →';
+}
+
+function showResults() {
+  document.getElementById('quiz-container').style.display = 'none';
+  const rb = document.getElementById('result-box');
+  rb.classList.add('show');
+  const pct = Math.round((score/quizData.length)*100);
+  document.getElementById('result-score').textContent = `${score} / ${quizData.length}`;
+  if (pct >= 90) { document.getElementById('result-emoji').textContent = '🏆'; document.getElementById('result-msg').textContent = 'Excellent! You\'re well-prepared for PSLE!'; }
+  else if (pct >= 70) { document.getElementById('result-emoji').textContent = '👍'; document.getElementById('result-msg').textContent = 'Good work! Review the questions you missed.'; }
+  else { document.getElementById('result-emoji').textContent = '📚'; document.getElementById('result-msg').textContent = 'Keep practising! Go back to the Concepts tab.'; }
+
+  document.getElementById('result-breakdown').innerHTML = results.map(r =>
+    `<div class="rb-item"><span>Q${r.num}</span><span class="rb-right ${r.correct?'pass':'fail'}">${r.correct?'✅ Correct':'❌ Wrong'}</span></div>`
+  ).join('');
+}
+
+initQuiz();
+setupMatch();
+</script>
+</body>
+</html>
